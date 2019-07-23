@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  api:
+    image: pet-api
+    build:
+      context: pet-api
+    volumes:
+      - ./pet-api:/app
+      - pet_api_box:/box
+    env_file:
+      - ./env/pet-api.env
+    ports:
+      - 3000:3000
+
+#  client:
+#    image: pet-client
+#    build:
+#      context: pet-client
+#    volumes:
+#      - ./pet-client:/app
+#    ports:
+#      - 4000:4000
+
+  database:
+    image: postgres:11
+    volumes:
+      - ./data/postgresql:/var/lib/postgresql/data
+    env_file:
+      - ./env/database.env
+    ports:
+      - 5432:5432
+
+  bundler_box:
+    image: busybox
+    command: tail -f /dev/null
+    volumes:
+      - pet_api_box:/boxes/pet_api
+
+volumes:
+  boxes:
+  pet_api_box:
+

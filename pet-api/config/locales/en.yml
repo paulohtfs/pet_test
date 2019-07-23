@@ -1,0 +1,5 @@
+en:
+  errors:
+    minimal_age: You must have 18 or more to have a Swallow.
+    no_cat_allow: Sorry, you not allow to have cats. Have an Alligators instead.
+    max_monthly_cost: For your safety, don't have more animals.

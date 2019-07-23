@@ -1,0 +1,5 @@
+pt-BR:
+  errors:
+    minimal_age: Você deve ter 18 anos ou mais para ter uma Andorinha.
+    no_cat_allow: Desculpe-nos, você não tem permissão pra ter um Gato, Em vez disso, tenha um Alce.
+    max_monthly_cost: Para a sua segurança, não tenha mais animais.

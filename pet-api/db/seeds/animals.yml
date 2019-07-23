@@ -1,0 +1,31 @@
+animals:
+  - name: Pé de Pano
+    monthly_cost: 199.99
+    animal_type: Cavalo
+    person: Johnny Cash
+
+  - name: Rex
+    monthly_cost: 99.99
+    animal_type: Cachorro
+    person: Sid Vicious
+
+  - name: Ajudante de Papai Noel
+    monthly_cost: 99.99
+    animal_type: Cachorro
+    person: Axl Rose
+
+  - name: Flora
+    monthly_cost: 103.99
+    animal_type: Papagaio
+    person: Joey Ramone
+
+  - name: Dino
+    monthly_cost: 177.99
+    animal_type: Iguana
+    person: Kurt Cobain
+
+  - name: Lassie
+    monthly_cost: 407.99
+    animal_type: Ornitorrinco
+    person: Elvis Presley
+
