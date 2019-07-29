@@ -24,5 +24,9 @@ module PetApi
 
     config.eager_load_paths << Rails.root.join('app', 'exeptions')
     config.eager_load_paths << Rails.root.join('app', 'services')
+
+    config.i18n.enforce_available_locales = true
+    config.i18n.default_locale = :'pt-BR'
+    config.i18n.available_locales = [:'pt-BR']
   end
 end

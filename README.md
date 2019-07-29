@@ -62,7 +62,7 @@ $ docker-compose exec api bundle exec rspec
 
 ## Questões
 
-Qual é o custo médio dos animais do tipo cachorro?
+#### Qual é o custo médio dos animais do tipo cachorro?
 Para todos os animais do banco
 ```
 Animals.joins(:animal_type).where(animal_types: { name: 'Cachorro' }).average(:monthly_cost)
@@ -72,14 +72,26 @@ Para todos os animais de uma pessoa
 Person.last.animals.joins(:animal_type).where(animal_types: { name: 'Cachorro' }).average(:monthly_cost)
 ```
 
-Quantos cachorros existem no sistema?
+#### Quantos cachorros existem no sistema?
 
 ```
 Animal.joins(:animal_type).where(animal_types: { name: 'Cachorro' }).count
 ```
 
-Qual o nome dos donos dos cachorros (Array de nomes)
+#### Qual o nome dos donos dos cachorros (Array de nomes)
 ```
 Person.joins(animals: :animal_type).where(animal_types: { name: 'Cachorro' }).pluck(:name)
+```
+
+#### Retorne as pessoas ordenando pelo custo que elas tem com os animais (Maior para menor)
+
+```
+Person.joins(:animals).group(:id).order('avg(animals.monthly_cost) desc')
+```
+
+#### Levando em consideração o custo mensal, qual será o custo de 3 meses de cada pessoa?
+
+```
+Person.joins(:animals).group(:id).sum('3*animals.monthly_cost')
 ```
 

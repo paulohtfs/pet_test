@@ -2,8 +2,9 @@ module Api
   module V1
     class AnimalsController < ApplicationController
       before_action :set_animal, only: [:show, :destroy]
-      before_action :set_animals, only: [:index]
-      before_action :set_person
+      before_action :set_animals, only: :index
+      before_action :set_person, if: :nested?
+      before_action :set_person, only: :create
 
       rescue_from AnimalError::MinimalAge, with: :minimal_age
       rescue_from AnimalError::NoCatAllow, with: :no_cat_allow
@@ -23,6 +24,10 @@ module Api
 
       private
 
+      def nested?
+        params[:person_id].present?
+      end
+
       def set_person
         @person = Person.find(params[:person_id])
       end
@@ -32,8 +37,8 @@ module Api
       end
 
       def set_animals
-        person = Person.find(params[:person_id])
-        @animals = Animal.where(person: person)
+        @animals = Animal.all # Admin Side
+        @animals = Animal.where(person: @person) if @person
       end
 
       def animal_params
@@ -49,7 +54,7 @@ module Api
       def minimal_age
         render(
           json: {
-            error: i18n.t('errors.minimal_age')
+            error: 'Você deve ter 18 anos ou mais para ter uma Andorinha.' #i18n.t('errors.minimal_age')
           },
           status: :unprocessable_entity
         )
@@ -58,7 +63,7 @@ module Api
       def no_cat_allow
         render(
           json: {
-            error: i18n.t('errors.no_cat_allow')
+            error: 'Desculpe-nos, você não tem permissão pra ter um Gato, Em vez disso, tenha um Alce.' #i18n.t('errors.no_cat_allow')
           },
           status: :unprocessable_entity
         )
@@ -67,7 +72,7 @@ module Api
       def max_monthly_cost
         render(
           json: {
-            error: i18n.t('errors.max_monthly_cost')
+            error: 'Para a sua segurança, não tenha mais animais.' #i18n.t('errors.max_monthly_cost')
           },
           status: :unprocessable_entity
         )
