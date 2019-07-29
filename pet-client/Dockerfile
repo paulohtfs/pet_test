@@ -1,5 +1,6 @@
 FROM node:carbon-jessie
 
-RUN yarn add global @quasar/cli
+ENV app /app/
+WORKDIR $app
 
 CMD yarn serve
